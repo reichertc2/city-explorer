@@ -1,3 +1,8 @@
+* {
+  background-color: #e2d4b7;
+  /* color:#9c9583; */
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,30 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+main {
+  margin: 0px auto;
+  width: 960px;
+  min-height: 500px;
+  background-color: #e2d4b7;
+
+  /* border: 1px solid red; */
+}
+
+h4 {
+  margin: 0px auto;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+  width: 45%;
+  /* border: 1px solid red; */
+}
+
+img {
+  padding: 5%;
+  margin: 0px auto;
+  border-radius: 15px;
+  width:350px;
+  height:350px;
 }

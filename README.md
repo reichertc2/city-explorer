@@ -15,6 +15,7 @@ This is the base for the extension of front-end applications to request informat
 * ([GitHub Site:](https://github.com/reichertc2/city-explorer))
 * ([Netlfy Site:](https://reichertc2-city-explorer.netlify.app/))
 * ([Trello Site:](https://trello.com/b/6IbYNwWz/city-explorer))
+* ([Color Palatte  Site:](https://coolors.co/e2d4b7-9c9583-a1a499-b0bbbf-cadbc8))
 
 ## Getting Started
 
@@ -33,8 +34,18 @@ This is the base for the extension of front-end applications to request informat
 
 ## Feature Time Estimates
 
-1. Name of feature: ________________________________
-* Estimate of time needed to complete: _____
-* Start time: _____
-* Finish time: _____
-* Actual time needed to complete: _____
+1. Name of feature: Set up your React repository & API keys.
+* Estimate of time needed to complete: 45 minutes
+* Start time: 2230
+* Finish time: 2335
+* Actual time needed to complete: 1 hour 5 minutes
+1. Name of feature: Locations: As a user of City Explorer, I want to enter the name of a location so that I can see the exact latitude and longitude of that location.
+* Estimate of time needed to complete: 1 hour
+* Start time: 2040
+* Finish time: 2200
+* Actual time needed to complete: 1 hour 20 minutes
+1. Name of feature: Map: As a user, I want to see a map of the city so that I can see the layout of the area I want to explore.
+* Estimate of time needed to complete: 1 hour
+* Start time: 2220
+* Finish time: 2230
+* Actual time needed to complete:  30 minutes
