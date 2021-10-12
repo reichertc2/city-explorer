@@ -10,7 +10,7 @@ import ErrorBlock from './Components/ErrorBlock.js';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       cityEntry: '',
       locationQuery: {},
+      locationWeather: [],
       mapURL: '',
       error: false,
       errorMessage: ''
@@ -56,10 +57,11 @@ class App extends React.Component {
         lon: dataPull.data[0].lon,
         searchQuery: dataPull.data[0].display_name
       }
-      let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${params.searchQuery}`);
+      let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
       console.log(weatherAPI.data);
       this.setState({
         locationQuery: dataPull.data[0],
+        locationWeather: weatherAPI
       })
     }
     catch (error) {
@@ -76,47 +78,56 @@ class App extends React.Component {
 
 
   render() {
-
+    // console.log(this.props);
     return (
       <>
-        <main>
-          <h1>Welcome to City Explorer</h1>
-          {/* <Form 
+        <Router>
+            <h1>Welcome to City Explorer</h1>
+            <Switch>
+
+            {/* <Form 
           // getLocation={this.getLocation} 
           assignLocation={this.assignLocation}
           getLocation={this.getLocation} /> */}
+            <Route exact path="/">
+              <InputGroup className="mb-3">
+                <InputGroup.Text id="addon1" className="p3">City Search: </InputGroup.Text>
+                <FormControl
+                  placeholder="Enter City Name"
+                  onChange={(event) => {
+                    event.preventDefault();
+                    this.setState({ cityEntry: event.target.value })
+                  }} />
+                <Button variant="secondary" onClick={this.getLocation}>Explore!!!!!!!!!</Button>
+              </InputGroup>
 
-          <InputGroup className="mb-3">
-            <InputGroup.Text id="addon1" className="p3">City Search:</InputGroup.Text>
-            <FormControl
-              placeholder="Enter City Name"
-              onChange={(event) => {
-                event.preventDefault();
-                this.setState({ cityEntry: event.target.value })
-              }} />
-            <Button variant="secondary" onClick={this.getLocation}>Explore!!!!!!!!!</Button>
-          </InputGroup>
+              {this.state.locationQuery.display_name && <div>
+                <CityName
+                  name={this.state.locationQuery.display_name} />
+                <LatLon
+                  lat={this.state.locationQuery.lat}
+                  lon={this.state.locationQuery.lon} />
+                <Map
+                  src={this.state.mapURL}
+                  alt={this.state.locationQuery.display_name} />
+              </div>}
+            </Route>
 
-          {this.state.locationQuery.display_name && <div>
-            <CityName
+            <Route path="/weather" >
+            <Weather 
+              locationWeather={this.state.locationWeather} 
               name={this.state.locationQuery.display_name} />
-            <LatLon
-              lat={this.state.locationQuery.lat}
-              lon={this.state.locationQuery.lon} />
-            <Map
-              src={this.state.mapURL}
-              alt={this.state.locationQuery.display_name} />
-            <Weather />
-          </div>}
+          </Route>
+        </Switch>
 
-          <ErrorBlock
-            clearError={this.clearError}
-            errorMessage={this.state.errorMessage}
-            error={this.state.error} />
-
-        </main>
+        <ErrorBlock
+          clearError={this.clearError}
+          errorMessage={this.state.errorMessage}
+          error={this.state.error} />
 
 
+
+      </Router>
       </>
     )
   };
