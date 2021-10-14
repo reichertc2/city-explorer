@@ -47,8 +47,12 @@ main {
   width: 960px;
   min-height: 500px;
   background-color: #e2d4b7;
-
   /* border: 1px solid red; */
+}
+
+section {
+  width: 45%;
+  display: inline-block;
 }
 
 h4 {
@@ -61,11 +65,16 @@ h4 {
 }
 
 img {
-  padding: 5%;
+  padding: 2%;
   width: 50%;
   margin: 0px auto;
   border-radius: 15px;
-  width:350px;
-  height:350px;
+  width: 350px;
+  height: 350px;
   display: inline-block;
+}
+
+h5{
+  display: inline-block;
+  width: 45%;
 }

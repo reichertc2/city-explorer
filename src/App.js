@@ -21,7 +21,9 @@ class App extends React.Component {
       locationWeather: [],
       mapURL: '',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      showWX: false
+
     }
   }
 
@@ -43,13 +45,8 @@ class App extends React.Component {
     let apiUrl = `https://us1.locationiq.com/v1/search.php?key=${REACT_APP_LOCATION_API_KEY}&q=${this.state.cityEntry}&format=json`
     // console.log(apiUrl);
     // adding parametersfor the server
-
-
-
     // error message display in 'try 'catch' method
     try {
-
-
       let dataPull = await axios.get(apiUrl);
       // console.log(dataPull.data[0]);
       let params = {
@@ -61,7 +58,8 @@ class App extends React.Component {
       console.log(weatherAPI.data);
       this.setState({
         locationQuery: dataPull.data[0],
-        locationWeather: weatherAPI
+        locationWeather: weatherAPI.data,
+        showWX: true
       })
     }
     catch (error) {
@@ -78,56 +76,78 @@ class App extends React.Component {
 
 
   render() {
-    // console.log(this.props);
+    console.log('this is state', this.state);
     return (
       <>
         <Router>
-            <h1>Welcome to City Explorer</h1>
+          <h1>Welcome to City Explorer</h1>
+          <main>
             <Switch>
 
-            {/* <Form 
+              {/* <Form 
           // getLocation={this.getLocation} 
           assignLocation={this.assignLocation}
           getLocation={this.getLocation} /> */}
-            <Route exact path="/">
-              <InputGroup className="mb-3">
-                <InputGroup.Text id="addon1" className="p3">City Search: </InputGroup.Text>
-                <FormControl
-                  placeholder="Enter City Name"
-                  onChange={(event) => {
-                    event.preventDefault();
-                    this.setState({ cityEntry: event.target.value })
-                  }} />
-                <Button variant="secondary" onClick={this.getLocation}>Explore!!!!!!!!!</Button>
-              </InputGroup>
+              <Route exact path="/">
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="addon1" className="p3">City Search: </InputGroup.Text>
+                  <FormControl
+                    placeholder="Enter City Name"
+                    onChange={(event) => {
+                      event.preventDefault();
+                      this.setState({ cityEntry: event.target.value })
+                    }} />
+                  <Button variant="secondary" onClick={this.getLocation}>Explore!!!!!!!!!</Button>
+                </InputGroup>
 
-              {this.state.locationQuery.display_name && <div>
-                <CityName
-                  name={this.state.locationQuery.display_name} />
-                <LatLon
-                  lat={this.state.locationQuery.lat}
-                  lon={this.state.locationQuery.lon} />
-                <Map
-                  src={this.state.mapURL}
-                  alt={this.state.locationQuery.display_name} />
-              </div>}
-            </Route>
+                {this.state.locationQuery.display_name && <div>
+                  <CityName
+                    name={this.state.locationQuery.display_name}
+                  />
+                  <LatLon
+                    lat={this.state.locationQuery.lat}
+                    lon={this.state.locationQuery.lon}
+                  />
+                  <section>
+                    <Map
+                      src={this.state.mapURL}
+                      alt={this.state.locationQuery.display_name}
+                    />
+                  </section>
+                  <section>
+                    {this.state.showWX && this.state.locationWeather.map((el) =>
+                      <Weather
+                        locationWeatherDate={el.date}
+                        locationWeatherDescription={el.description}
+                        clearError={this.clearError}
+                        errorMessage={this.state.errorMessage}
+                        error={this.state.error} />)}
+                  </section>
+                </div>}
+                {!(this.state.mapURL) && 
+                <ErrorBlock
+                  clearError={this.clearError}
+                  errorMessage={this.state.errorMessage}
+                  error={this.state.error} />
+                }
+              </Route>
 
-            <Route path="/weather" >
-            <Weather 
-              locationWeather={this.state.locationWeather} 
-              name={this.state.locationQuery.display_name} />
-          </Route>
-        </Switch>
-
-        <ErrorBlock
-          clearError={this.clearError}
-          errorMessage={this.state.errorMessage}
-          error={this.state.error} />
+              <Route path="/weather" >
+                <Weather
+                  locationWeather={this.state.locationWeather}
+                  name={this.state.locationQuery.display_name}
+                  clearError={this.clearError}
+                  errorMessage={this.state.errorMessage}
+                  error={this.state.error} />
+              </Route>
+            </Switch>
 
 
 
-      </Router>
+          </main>
+
+
+        </Router>
       </>
     )
   };
