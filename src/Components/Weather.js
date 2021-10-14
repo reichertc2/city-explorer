@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBlock from './ErrorBlock.js';
+// import ErrorBlock from './ErrorBlock.js';
 import Card from 'react-bootstrap/Card'
 
 class Weather extends React.Component {
@@ -18,10 +18,10 @@ class Weather extends React.Component {
 
                     </Card.Body>
                 </Card>
-                <ErrorBlock
+                {/* <ErrorBlock
                     clearError={this.props.clearError}
                     errorMessage={this.props.errorMessage}
-                    error={this.props.error} />
+                    error={this.props.error} /> */}
 
             </>
         )
