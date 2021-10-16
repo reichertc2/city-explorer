@@ -25,8 +25,10 @@ class Form extends React.Component {
                     <FormControl
                         placeholder="Enter City Name"
                         onChange={this.handleChange}
-                         />
-                    <Button variant="secondary" onClick={this.props.getLocation}>Explore!!!!!!!!!</Button>
+                    />
+                    <Button
+                        variant="secondary"
+                        onClick={this.props.getLocation}>Explore!!!!!!!!!</Button>
                 </InputGroup>
                 <h3>{this.state.cityEntry}</h3>
             </>
