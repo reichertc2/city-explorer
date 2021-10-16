@@ -56,8 +56,10 @@ class App extends React.Component {
         lon: dataPull.data[0].lon,
         searchQuery: dataPull.data[0].display_name
       }
-      let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
-      let movieAPI = await axios.get(`http://localhost:3001/movies?searchQuery=${this.state.cityEntry}`)
+      // let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
+      // let movieAPI = await axios.get(`http://localhost:3001/movies?searchQuery=${this.state.cityEntry}`)
+      let weatherAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com//weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
+      let movieAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com//movies?searchQuery=${this.state.cityEntry}`)
       // console.log(weatherAPI.data);
       // console.log(movieAPI);
       this.setState({
