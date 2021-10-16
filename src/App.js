@@ -11,6 +11,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Movies from './Components/Movies';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +23,9 @@ class App extends React.Component {
       mapURL: '',
       error: false,
       errorMessage: '',
-      showWX: false
-
+      showWX: false,
+      moviesArray: [],
+      showMovie: false
     }
   }
 
@@ -55,11 +57,15 @@ class App extends React.Component {
         searchQuery: dataPull.data[0].display_name
       }
       let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
-      console.log(weatherAPI.data);
+      let movieAPI = await axios.get(`http://localhost:3001/movies?searchQuery=${this.state.cityEntry}`)
+      // console.log(weatherAPI.data);
+      // console.log(movieAPI);
       this.setState({
         locationQuery: dataPull.data[0],
         locationWeather: weatherAPI.data,
-        showWX: true
+        showWX: true,
+        moviesArray: movieAPI.data,
+        showMovie: true
       })
     }
     catch (error) {
@@ -76,7 +82,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log('this is state', this.state);
+    // console.log('this is state', this.state.moviesArray);
     return (
       <>
         <Router>
@@ -123,12 +129,23 @@ class App extends React.Component {
                         errorMessage={this.state.errorMessage}
                         error={this.state.error} />)}
                   </section>
+                  <section>
+
+                    {this.state.showMovie && this.state.moviesArray.map((el) =>
+                      <Movies
+                        movieTitle={el.title}
+                        movieOverview={el.overview}
+                        moviePopularity={el.popularity}
+                        movieImage={el.imageURL}
+                        movieVotes={el.average_votes} />)}
+
+                  </section>
                 </div>}
-                {!(this.state.mapURL) && 
-                <ErrorBlock
-                  clearError={this.clearError}
-                  errorMessage={this.state.errorMessage}
-                  error={this.state.error} />
+                {!(this.state.mapURL) &&
+                  <ErrorBlock
+                    clearError={this.clearError}
+                    errorMessage={this.state.errorMessage}
+                    error={this.state.error} />
                 }
               </Route>
 
