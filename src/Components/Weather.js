@@ -9,7 +9,7 @@ class Weather extends React.Component {
 
         return (
             <section>
-                <h3>4 Day Forecast</h3>
+                <h3 style={{textAlign:"center", margin:"2%", fontSize:"1.25rem"}}>4 Day Forecast</h3>
                 {this.props.locationWeather.map((el) =>
                     <WeatherDay
                         locationWeatherDate={el.date}

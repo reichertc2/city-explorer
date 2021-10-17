@@ -7,8 +7,8 @@ class Movies extends React.Component {
 
         return (
             <>
-            <h3>Movies with City Name:</h3>
-                <Movie className="d-inline-block" style={{width: '50%'}}
+            
+                <Movie className="d-inline-block" style={{width: '45%'}}
                     movieImage={this.props.movieImage}
                     movieTitle={this.props.movieTitle}
                     movieOverview={this.props.movieOverview} />

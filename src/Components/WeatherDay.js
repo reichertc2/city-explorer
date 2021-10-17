@@ -6,9 +6,9 @@ class WeatherDay extends React.Component {
         // console.log('weatherDay.js props',this.props);
         return (
             <>
-                <Card className="border-1 border-dark" style={{ width: '18rem' }}>
+                <Card style={{ margin:"3%",width: '100%', border:"2px transparent solid" }}>
                     <Card.Body>
-                        <Card.Title className="text-center">Scheduled Forecast: {this.props.locationWeatherDate}</Card.Title>
+                        <Card.Title style={{fontSize:"1.1rem", fontWeight:"bold"}}>Date : <span style={{fontSize:"1.1rem", fontWeight:"normal"}}> {this.props.locationWeatherDate}</span></Card.Title>
                         <Card.Text>
                             {this.props.locationWeatherDescription}
                         </Card.Text>

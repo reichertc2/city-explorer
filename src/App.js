@@ -102,13 +102,13 @@ class App extends React.Component {
         <Header />
 
           <main>
-                <Form className="m-3 p-5"
+                <Form 
                   getLocation={this.getLocation}
                   assignLocation={this.assignLocation} 
                   resetState={this.resetState}/>
 
                 {this.state.locationQuery.display_name && <div>
-                  <CityName
+                  <CityName 
                     name={this.state.locationQuery.display_name}
                   />
                   <LatLon
@@ -127,9 +127,10 @@ class App extends React.Component {
                         locationWeather={this.state.locationWeather}
                          />
                     }
-                  <section>
-
+                  <section style={{width: "100%"}}>
+                  <h3 style={{textAlign:"center", margin:"5%", fontSize:"1.5rem"}}>Movies with City Name:</h3>
                     {this.state.showMovie && this.state.moviesArray.map((el) =>
+
                       <Movies
                         movieTitle={el.title}
                         movieOverview={el.overview}
