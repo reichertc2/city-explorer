@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 class ErrorBlock extends React.Component {
 
     render() {
+        // console.log('this is state errorblock', this.props.error);
         return (
             <>
                 {this.props.error && <div>

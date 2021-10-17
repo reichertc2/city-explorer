@@ -1,31 +1,24 @@
 import React from 'react';
 // import ErrorBlock from './ErrorBlock.js';
-import Card from 'react-bootstrap/Card'
+import WeatherDay from './WeatherDay.js';
+// import Card from 'react-bootstrap/Card'
 
 class Weather extends React.Component {
     render() {
-        // console.log(this.props);
+        // console.log('weather.js props', this.props);
 
         return (
-            <>
-
-                <Card className="border-1 border-dark" style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Title className="text-center">Scheduled Forecast: {this.props.locationWeatherDate}</Card.Title>
-                        <Card.Text>
-                            {this.props.locationWeatherDescription}
-                        </Card.Text>
-
-                    </Card.Body>
-                </Card>
-                {/* <ErrorBlock
-                    clearError={this.props.clearError}
-                    errorMessage={this.props.errorMessage}
-                    error={this.props.error} /> */}
-
-            </>
+            <section>
+                <h3>4 Day Forecast</h3>
+                {this.props.locationWeather.map((el) =>
+                    <WeatherDay
+                        locationWeatherDate={el.date}
+                        locationWeatherDescription={el.description}
+                        key={el.key}
+                    />)
+                }
+            </section>
         )
-
     }
 }
 
