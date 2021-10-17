@@ -1,5 +1,5 @@
 import React from "react";
-import Card from 'react-bootstrap/Card';
+import Movie from "./Movie.js";
 
 class Movies extends React.Component {
     render() {
@@ -7,21 +7,12 @@ class Movies extends React.Component {
 
         return (
             <>
-                {/* <h4></h4>
-                <h4></h4>
-                <h4>{this.props.moviePopularity}</h4>
-                <h4></h4>
-                <h4>{this.props.movieVotes}</h4> */}
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={this.props.movieImage} alt={this.props.movieTitle} />
-                    <Card.Body>
-                        <Card.Title>{this.props.movieTitle}</Card.Title>
-                        <Card.Text>
-                        {this.props.movieOverview}
-                        </Card.Text>
-                        {/* <Button variant="primary">Go somewhere</Button> */}
-                    </Card.Body>
-                </Card>
+            
+                <Movie className="d-inline-block" style={{width: '45%'}}
+                    movieImage={this.props.movieImage}
+                    movieTitle={this.props.movieTitle}
+                    movieOverview={this.props.movieOverview} />
+
 
             </>
         )

@@ -1,16 +1,13 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-// import Form from './Components/Form.js'
+import Header from './Components/Header.js';
+import Form from './Components/Form.js'
 import CityName from './Components/CityName.js';
 import LatLon from './Components/LatLon.js';
 import Map from './Components/Map.js'
 import Weather from './Components/Weather.js';
 import ErrorBlock from './Components/ErrorBlock.js';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Movies from './Components/Movies';
 
 class App extends React.Component {
@@ -29,16 +26,31 @@ class App extends React.Component {
     }
   }
 
-  clearError = () => {
+  resetState = () =>{
     this.setState({
+      cityEntry: '',
+      locationQuery: {},
+      locationWeather: [],
+      mapURL: '',
       error: false,
       errorMessage: '',
-      cityEntry: ''
+      showWX: false,
+      moviesArray: [],
+      showMovie: false
     })
   }
 
-  assignLocation(value) {
-    this.setState({ cityEntry: value })
+  clearError = () => {
+    this.resetState();
+  }
+
+  assignLocation = (value) => {
+    // console.log(value, this.state);
+
+    this.setState({ cityEntry: value }, () => {
+      this.getLocation();
+    })
+
   }
 
   getLocation = async () => {
@@ -56,10 +68,10 @@ class App extends React.Component {
         lon: dataPull.data[0].lon,
         searchQuery: dataPull.data[0].display_name
       }
-      // let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
-      // let movieAPI = await axios.get(`http://localhost:3001/movies?searchQuery=${this.state.cityEntry}`)
-      let weatherAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
-      let movieAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com/movies?searchQuery=${this.state.cityEntry}`)
+      let weatherAPI = await axios.get(`http://localhost:3001/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
+      let movieAPI = await axios.get(`http://localhost:3001/movies?searchQuery=${this.state.cityEntry}`)
+      // let weatherAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com/weather?lat=${params.lat}&lon=${params.lon}&searchQuery=${this.state.cityEntry}`);
+      // let movieAPI = await axios.get(`https://fierce-badlands-59125.herokuapp.com/movies?searchQuery=${this.state.cityEntry}`)
       // console.log(weatherAPI.data);
       // console.log(movieAPI);
       this.setState({
@@ -84,56 +96,41 @@ class App extends React.Component {
 
 
   render() {
-    // console.log('this is state', this.state.moviesArray);
+    // console.log('this is state', this.state.error);
     return (
       <>
-        <Router>
-          <h1>Welcome to City Explorer</h1>
-          <main>
-            <Switch>
+        <Header />
 
-              {/* <Form 
-          // getLocation={this.getLocation} 
-          assignLocation={this.assignLocation}
-          getLocation={this.getLocation} /> */}
-              <Route exact path="/">
-                <InputGroup className="mb-3">
-                  <InputGroup.Text id="addon1" className="p3">City Search: </InputGroup.Text>
-                  <FormControl
-                    placeholder="Enter City Name"
-                    onChange={(event) => {
-                      event.preventDefault();
-                      this.setState({ cityEntry: event.target.value })
-                    }} />
-                  <Button variant="secondary" onClick={this.getLocation}>Explore!!!!!!!!!</Button>
-                </InputGroup>
+          <main>
+                <Form 
+                  getLocation={this.getLocation}
+                  assignLocation={this.assignLocation} 
+                  resetState={this.resetState}/>
 
                 {this.state.locationQuery.display_name && <div>
-                  <CityName
+                  <CityName 
                     name={this.state.locationQuery.display_name}
                   />
                   <LatLon
                     lat={this.state.locationQuery.lat}
                     lon={this.state.locationQuery.lon}
                   />
-                  <section>
+
                     <Map
                       src={this.state.mapURL}
                       alt={this.state.locationQuery.display_name}
                     />
-                  </section>
-                  <section>
-                    {this.state.showWX && this.state.locationWeather.map((el) =>
-                      <Weather
-                        locationWeatherDate={el.date}
-                        locationWeatherDescription={el.description}
-                        clearError={this.clearError}
-                        errorMessage={this.state.errorMessage}
-                        error={this.state.error} />)}
-                  </section>
-                  <section>
 
+
+                    {this.state.showWX &&
+                      <Weather
+                        locationWeather={this.state.locationWeather}
+                         />
+                    }
+                  <section style={{width: "100%"}}>
+                  <h3 style={{textAlign:"center", margin:"5%", fontSize:"1.5rem"}}>Movies with City Name:</h3>
                     {this.state.showMovie && this.state.moviesArray.map((el) =>
+
                       <Movies
                         movieTitle={el.title}
                         movieOverview={el.overview}
@@ -143,30 +140,15 @@ class App extends React.Component {
 
                   </section>
                 </div>}
-                {!(this.state.mapURL) &&
+                {(this.state.error) &&
                   <ErrorBlock
                     clearError={this.clearError}
                     errorMessage={this.state.errorMessage}
                     error={this.state.error} />
                 }
-              </Route>
-
-              <Route path="/weather" >
-                <Weather
-                  locationWeather={this.state.locationWeather}
-                  name={this.state.locationQuery.display_name}
-                  clearError={this.clearError}
-                  errorMessage={this.state.errorMessage}
-                  error={this.state.error} />
-              </Route>
-            </Switch>
-
-
 
           </main>
 
-
-        </Router>
       </>
     )
   };

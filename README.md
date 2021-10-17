@@ -15,7 +15,9 @@ This is the base for the extension of front-end applications to request informat
 * ([GitHub Site:](https://github.com/reichertc2/city-explorer))
 * ([Netlfy Site:](https://reichertc2-city-explorer.netlify.app/))
 * ([Trello Site:](https://trello.com/b/6IbYNwWz/city-explorer))
-* ([Color Palatte  Site:](https://coolors.co/e2d4b7-9c9583-a1a499-b0bbbf-cadbc8))
+* ([Color Palatte  Site:](https://coolors.co/313e50-3a435e-455561-5c6672-6c6f7f))
+
+
 
 ## Getting Started
 

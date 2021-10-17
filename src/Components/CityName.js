@@ -4,7 +4,7 @@ class CityName extends React.Component{
     render(){
         return(
             <>
-            <h3>{this.props.name}</h3>
+            <h3 style={{textAlign:"center", margin:"5%", fontSize:"1.5rem"}}>{this.props.name}</h3>
             </>
         )
     }
