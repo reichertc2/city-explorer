@@ -1,38 +1,38 @@
 # City Explorer
 
 **Author**: Chris Reichert
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 
+1.0.0 Inital Build-out
+1.1.0 Refactor for componetization
+1.1.1 Improved styling
 
 ## Overview
 
-This is the base for the extension of front-end applications to request information from APIs
+This an API exibition for calling information in the front-end and back-end and displaying results based off search queries.
 
 ## Links and Resources
-
-* React
-* React-Boostrap
-* Bootstrap
 * ([GitHub Site:](https://github.com/reichertc2/city-explorer))
 * ([Netlfy Site:](https://reichertc2-city-explorer.netlify.app/))
+* ([Heroku Site:](https://fierce-badlands-59125.herokuapp.com/))
 * ([Trello Site:](https://trello.com/b/6IbYNwWz/city-explorer))
 * ([Color Palatte  Site:](https://coolors.co/313e50-3a435e-455561-5c6672-6c6f7f))
-
-
 
 ## Getting Started
 
 !([WRRC Layout](./src/img/WRRC-Image.png))
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+This project includes the following technologies:
+* React
+* React-Boostrap
+* Bootstrap
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+See feature adds below
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+* Big thanks to Chris Rarig for helping out in conditional rendering of selected elements 
+* Big thanks to Joe Pennecok for helping figure out why Weather.js was not passing info to weatherday.js
 
 ## Feature Time Estimates
 
@@ -47,6 +47,21 @@ This is the base for the extension of front-end applications to request informat
 * Finish time: 2200
 * Actual time needed to complete: 1 hour 20 minutes
 1. Name of feature: Map: As a user, I want to see a map of the city so that I can see the layout of the area I want to explore.
+* Estimate of time needed to complete: 1 hour
+* Start time: 2220
+* Finish time: 2230
+* Actual time needed to complete:  30 minutes
+1. Name of feature: Errors inclusion
+* Estimate of time needed to complete: 1 hour
+* Start time: 2020
+* Finish time: 2130
+* Actual time needed to complete:  90 minutes
+1. Name of feature: Tie in to back end with weather JSON file
+* Estimate of time needed to complete: 1 hour
+* Start time: 2100
+* Finish time: 2230
+* Actual time needed to complete:  2 hours 
+1. Name of feature: Clear error functionality
 * Estimate of time needed to complete: 1 hour
 * Start time: 2220
 * Finish time: 2230
